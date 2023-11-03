@@ -232,7 +232,7 @@ fs.readFile("data.txt", 'utf8', function (err, data) {
     //érkezés távozás feltöltése és a velük egy sorban lévő cellák szinezése
     for (let i = 0; i < dataArray.length; i++) {
         formattedStart = dataArray[i].formattedStart
-        firmattedEnd = dataArray[i].formattedEnd
+        formattedEnd = dataArray[i].formattedEnd
         ws.cell(dataArray[i].day + 2, 2)
         .string(formattedStart)
         .style(filledDateCell)
@@ -242,7 +242,7 @@ fs.readFile("data.txt", 'utf8', function (err, data) {
         .style(filledDateCell)
 
         ws.cell(dataArray[i].day + 2, 4)
-        .formula(`=C${dataArray[i].day + 1}-B${dataArray[i].day + 1}`)
+        .formula(`=C${dataArray[i].day + 2}-B${dataArray[i].day + 2}`)
         .style(filledDateCell)
 
         ws.cell(dataArray[i].day + 2, 5)
