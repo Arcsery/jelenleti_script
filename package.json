@@ -1,8 +1,6 @@
 {
   "dependencies": {
     "date-fns": "^2.30.0",
-    "excel4node": "^1.8.2",
-    "moment": "^2.29.4",
-    "moment-timezone": "^0.5.43"
+    "excel4node": "^1.8.2"
   }
 }
