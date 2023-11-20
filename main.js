@@ -1,6 +1,6 @@
 var xl = require('excel4node');
 const fs = require('fs');
-const { format } = require('date-fns');
+const { parse, format } = require('date-fns');
 
 var wb = new xl.Workbook()
 var ws = wb.addWorksheet('Sheet 1');
@@ -150,6 +150,7 @@ var headerStyle = wb.createStyle({
     numberFormat: 'yyyy-mm-dd'
 })
 
+
 function addLeadingZero(time) {
     const [hours, minutes] = time.split(":");
     const formattedHours = hours.length === 1 ? `0${hours}` : hours;
@@ -159,7 +160,6 @@ function addLeadingZero(time) {
 
 var formattedStart = ""
 var formattedEnd = ""
-
 //File beolvasás
 fs.readFile("data.txt", 'utf8', function (err, data) {
     if (err) throw err;
@@ -171,8 +171,12 @@ fs.readFile("data.txt", 'utf8', function (err, data) {
         var [day, start, end] = line.split(",");
         day = parseInt(day);
         if(start != undefined && end != undefined){
-            formattedStart = format(new Date(`2000-01-01T${addLeadingZero(start)}`), 'HH:mm:ss');
-            formattedEnd = format(new Date(`2000-01-01T${addLeadingZero(end)}`), 'HH:mm:ss');
+            const parsedStartTime = parse(start, 'H:mm', new Date()); 
+            const parsedEndTime = parse(end, 'H:mm', new Date()); 
+            formattedStart = format(parsedStartTime, 'HH:mm:ss');
+            formattedEnd = format(parsedEndTime, 'HH:mm:ss');
+            console.log(formattedEnd)
+   
         }
         return { day, formattedStart, formattedEnd };
     });
